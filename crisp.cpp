@@ -2,15 +2,20 @@
 #include <stdlib.h>
 
 #include <string>
+#include <stdexcept>
 
 #include "./src/constants.h"
-#include "./src/window.h"
+#include "./src/crispApp.h"
 
 int main(int argc, char *argv[]) {
-    logm(DEBUG_INFO, "hey Mark!");
-    CrispWindow *win = new CrispWindow(1280, 720, "Vulkan first test");
+    CrispApp app;
+    
+    try {
+        app.run();
+    } catch(std::exception *e) {
+        logm(DEBUG_ERROR, e->what());
+        exit(EXIT_FAILURE);
+    }
 
-    win->runLoop();
-
-    logm(DEBUG_INFO, "Done!");
+    exit(EXIT_SUCCESS);
 }
